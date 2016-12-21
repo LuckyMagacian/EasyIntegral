@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.easyintegral.dao.IntegralUserDao">
+<insert id="addIntegralUser" parameterType="com.lanxi.easyintegral.entity.IntegralUser">
+insert into integral_user 
+(id,phone,point_value,status,sub_time,unsub_time,remark,beiy)
+values
+(#{id},#{phone},#{pointValue},#{status},#{subTime},#{unsubTime},#{remark},#{beiy})
+</insert>
+<insert id="addIntegralUserDefault" parameterType="com.lanxi.easyintegral.entity.IntegralUser">
+insert into integral_user 
+(id,phone,point_value,status,sub_time,unsub_time,remark,beiy)
+values
+(DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<delete id="deleteIntegralUser" parameterType="com.lanxi.easyintegral.entity.IntegralUser">
+delete from integral_user
+<where>
+<if test="id != null and id!=''"> and id = #{id}  </if>  
+<if test="phone != null and phone!=''"> and phone = #{phone}  </if>  
+<if test="pointValue != null and pointValue!=''"> and point_value = #{pointValue}  </if>  
+<if test="status != null and status!=''"> and status = #{status}  </if>  
+<if test="subTime != null and subTime!=''"> and sub_time = #{subTime}  </if>  
+<if test="unsubTime != null and unsubTime!=''"> and unsub_time = #{unsubTime}  </if>  
+<if test="remark != null and remark!=''"> and remark = #{remark}  </if>  
+<if test="beiy != null and beiy!=''"> and beiy = #{beiy}  </if>  
+</where>
+</delete>
+<delete id="deleteIntegralUserById" parameterType="String">
+delete from integral_user
+<where>
+id = #{id}  
+</where>
+</delete>
+<update id="updateIntegralUser" parameterType="com.lanxi.easyintegral.entity.IntegralUser">
+update integral_user
+<set> 
+<if test="id != null and id!=''">id = #{id},</if>  
+<if test="phone != null and phone!=''">phone = #{phone},</if>  
+<if test="pointValue != null and pointValue!=''">point_value = #{pointValue},</if>  
+<if test="status != null and status!=''">status = #{status},</if>  
+<if test="subTime != null and subTime!=''">sub_time = #{subTime},</if>  
+<if test="unsubTime != null and unsubTime!=''">unsub_time = #{unsubTime},</if>  
+<if test="remark != null and remark!=''">remark = #{remark},</if>  
+<if test="beiy != null and beiy!=''">beiy = #{beiy},</if>  
+</set>
+<where>
+id = #{id} 
+</where>
+</update>
+<select id="selectIntegralUser" resultMap="integralUserMap" parameterType="com.lanxi.easyintegral.entity.IntegralUser" resultType="com.lanxi.easyintegral.entity.IntegralUser">
+select
+id,phone,point_value,status,sub_time,unsub_time,remark,beiy
+from integral_user
+<where> 
+<if test="id != null and id!=''"> and id = #{id}  </if>  
+<if test="phone != null and phone!=''"> and phone = #{phone}  </if>  
+<if test="pointValue != null and pointValue!=''"> and point_value = #{pointValue}  </if>  
+<if test="status != null and status!=''"> and status = #{status}  </if>  
+<if test="subTime != null and subTime!=''"> and sub_time = #{subTime}  </if>  
+<if test="unsubTime != null and unsubTime!=''"> and unsub_time = #{unsubTime}  </if>  
+<if test="remark != null and remark!=''"> and remark = #{remark}  </if>  
+<if test="beiy != null and beiy!=''"> and beiy = #{beiy}  </if>  
+</where>
+</select>
+<select id="selectIntegralUserById" resultMap="integralUserMap" parameterType="java.lang.String" resultType="com.lanxi.easyintegral.entity.IntegralUser">
+select
+id,phone,point_value,status,sub_time,unsub_time,remark,beiy
+from integral_user
+<where> 
+id = #{id} 
+</where>
+</select>
+<resultMap id="integralUserMap" type="com.lanxi.easyintegral.entity.IntegralUser">
+<result property="id" 					column="id"></result>
+<result property="phone" 				column="phone"></result>
+<result property="pointValue" 			column="point_value"></result>
+<result property="status" 			column="status"></result>
+<result property="subTime" 				column="sub_time"></result>
+<result property="unsubTime" 			column="unsub_time"></result>
+<result property="remark" 				column="remark"></result>
+<result property="beiy" 				column="beiy"></result>
+</resultMap>
+</mapper>

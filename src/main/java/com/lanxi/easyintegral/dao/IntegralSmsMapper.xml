@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.easyintegral.dao.IntegralSmsDao">
+<insert id="addIntegralSms" parameterType="com.lanxi.easyintegral.entity.IntegralSms">
+insert into integral_sms 
+(id,user_id,template_id,gift_id,status,phone,content,send_time,over_time,send_times,max_send_times,reply_time,reply_times,max_reply_times,res_code,res_msg,remark,beiy)
+values
+(#{id},#{userId},#{templateId},#{giftId},#{status},#{phone},#{content},#{sendTime},#{overTime},#{sendTimes},#{maxSendTimes},#{replyTime},#{replyTimes},#{maxReplyTimes},#{resCode},#{resMsg},#{remark},#{beiy})
+</insert>
+<insert id="addIntegralSmsDefault" parameterType="com.lanxi.easyintegral.entity.IntegralSms">
+insert into integral_sms 
+(id,user_id,template_id,gift_id,status,phone,content,send_time,over_time,send_times,max_send_times,reply_time,reply_times,max_reply_times,res_code,res_msg,remark,beiy)
+values
+(DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<delete id="deleteIntegralSms" parameterType="com.lanxi.easyintegral.entity.IntegralSms">
+delete from integral_sms
+<where>
+<if test="id != null and id!=''"> and id = #{id}  </if>  
+<if test="userId != null and userId!=''"> and user_id = #{userId}  </if>  
+<if test="templateId != null and templateId!=''"> and template_id = #{templateId}  </if>  
+<if test="giftId != null and giftId!=''"> and gift_id = #{giftId}  </if>  
+<if test="status != null and status!=''"> and status = #{status}  </if>  
+<if test="phone != null and phone!=''"> and phone = #{phone}  </if>  
+<if test="content != null and content!=''"> and content = #{content}  </if>  
+<if test="sendTime != null and sendTime!=''"> and send_time = #{sendTime}  </if>  
+<if test="overTime != null and overTime!=''"> and over_time = #{overTime}  </if>  
+<if test="sendTimes != null and sendTimes!=''"> and send_times = #{sendTimes}  </if>  
+<if test="maxSendTimes != null and maxSendTimes!=''"> and max_send_times = #{maxSendTimes}  </if>  
+<if test="replyTime != null and replyTime!=''"> and reply_time = #{replyTime}  </if>  
+<if test="replyTimes != null and replyTimes!=''"> and reply_times = #{replyTimes}  </if>  
+<if test="maxReplyTimes != null and maxReplyTimes!=''"> and max_reply_times = #{maxReplyTimes}  </if>  
+<if test="resCode != null and resCode!=''"> and res_code = #{resCode}  </if>  
+<if test="resMsg != null and resMsg!=''"> and res_msg = #{resMsg}  </if>  
+<if test="remark != null and remark!=''"> and remark = #{remark}  </if>  
+<if test="beiy != null and beiy!=''"> and beiy = #{beiy}  </if>  
+</where>
+</delete>
+<delete id="deleteIntegralSmsById" parameterType="String">
+delete from integral_sms
+<where>
+id = #{id} 
+</where>
+</delete>
+<update id="updateIntegralSms" parameterType="com.lanxi.easyintegral.entity.IntegralSms">
+update integral_sms
+<set> 
+<if test="id != null and id!=''">id = #{id},</if>  
+<if test="userId != null and userId!=''">user_id = #{userId},</if>  
+<if test="templateId != null and templateId!=''">template_id = #{templateId},</if>  
+<if test="giftId != null and giftId!=''">gift_id = #{giftId},</if>  
+<if test="status != null and status!=''">status = #{status},</if>  
+<if test="phone != null and phone!=''">phone = #{phone},</if>  
+<if test="content != null and content!=''">content = #{content},</if>  
+<if test="sendTime != null and sendTime!=''">send_time = #{sendTime},</if>  
+<if test="overTime != null and overTime!=''">over_time = #{overTime},</if>  
+<if test="sendTimes != null and sendTimes!=''">send_times = #{sendTimes},</if>  
+<if test="maxSendTimes != null and maxSendTimes!=''">max_send_times = #{maxSendTimes},</if>  
+<if test="replyTime != null and replyTime!=''">reply_time = #{replyTime},</if>  
+<if test="replyTimes != null and replyTimes!=''">reply_times = #{replyTimes},</if>  
+<if test="maxReplyTimes != null and maxReplyTimes!=''">max_reply_times = #{maxReplyTimes},</if>  
+<if test="resCode != null and resCode!=''">res_code = #{resCode},</if>  
+<if test="resMsg != null and resMsg!=''">res_msg = #{resMsg},</if>  
+<if test="remark != null and remark!=''">remark = #{remark},</if>  
+<if test="beiy != null and beiy!=''">beiy = #{beiy},</if>  
+</set>
+<where>
+id = #{id}  
+</where>
+</update>
+<select id="selectIntegralSms" resultMap="integralSmsMap" parameterType="com.lanxi.easyintegral.entity.IntegralSms" resultType="com.lanxi.easyintegral.entity.IntegralSms">
+select
+id,user_id,template_id,gift_id,status,phone,content,send_time,over_time,send_times,max_send_times,reply_time,reply_times,max_reply_times,res_code,res_msg,remark,beiy
+from integral_sms
+<where> 
+<if test="id != null and id!=''"> and id = #{id}  </if>  
+<if test="userId != null and userId!=''"> and user_id = #{userId}  </if>  
+<if test="templateId != null and templateId!=''"> and template_id = #{templateId}  </if>  
+<if test="giftId != null and giftId!=''"> and gift_id = #{giftId}  </if>  
+<if test="status != null and status!=''"> and status = #{status}  </if>  
+<if test="phone != null and phone!=''"> and phone = #{phone}  </if>  
+<if test="content != null and content!=''"> and content = #{content}  </if>  
+<if test="sendTime != null and sendTime!=''"> and send_time = #{sendTime}  </if>  
+<if test="overTime != null and overTime!=''"> and over_time = #{overTime}  </if>  
+<if test="sendTimes != null and sendTimes!=''"> and send_times = #{sendTimes}  </if>  
+<if test="maxSendTimes != null and maxSendTimes!=''"> and max_send_times = #{maxSendTimes}  </if>  
+<if test="replyTime != null and replyTime!=''"> and reply_time = #{replyTime}  </if>  
+<if test="replyTimes != null and replyTimes!=''"> and reply_times = #{replyTimes}  </if>  
+<if test="maxReplyTimes != null and maxReplyTimes!=''"> and max_reply_times = #{maxReplyTimes}  </if>  
+<if test="resCode != null and resCode!=''"> and res_code = #{resCode}  </if>  
+<if test="resMsg != null and resMsg!=''"> and res_msg = #{resMsg}  </if>  
+<if test="remark != null and remark!=''"> and remark = #{remark}  </if>  
+<if test="beiy != null and beiy!=''"> and beiy = #{beiy}  </if>  
+</where>
+order by send_time desc
+</select>
+<select id="selectIntegralSmsById" resultMap="integralSmsMap" parameterType="String" resultType="com.lanxi.easyintegral.entity.IntegralSms">
+select
+id,user_id,template_id,gift_id,status,phone,content,send_time,over_time,send_times,max_send_times,reply_time,reply_times,max_reply_times,res_code,res_msg,remark,beiy
+from integral_sms
+<where> 
+id = #{id}  
+</where>
+order by send_time desc
+</select>
+<resultMap id="integralSmsMap" type="com.lanxi.easyintegral.entity.IntegralSms">
+<result property="id" 			column="id"></result>
+<result property="userId" 			column="user_id"></result>
+<result property="templateId" 			column="template_id"></result>
+<result property="giftId" 			column="gift_id"></result>
+<result property="status" 			column="status"></result>
+<result property="phone" 			column="phone"></result>
+<result property="content" 			column="content"></result>
+<result property="sendTime" 			column="send_time"></result>
+<result property="overTime" 			column="over_time"></result>
+<result property="sendTimes" 			column="send_times"></result>
+<result property="maxSendTimes" 			column="max_send_times"></result>
+<result property="replyTime" 			column="reply_time"></result>
+<result property="replyTimes" 			column="reply_times"></result>
+<result property="maxReplyTimes" 			column="max_reply_times"></result>
+<result property="resCode" 			column="res_code"></result>
+<result property="resMsg" 			column="res_msg"></result>
+<result property="remark" 			column="remark"></result>
+<result property="beiy" 			column="beiy"></result>
+</resultMap>
+</mapper>

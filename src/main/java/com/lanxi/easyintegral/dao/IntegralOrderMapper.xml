@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.lanxi.easyintegral.dao.IntegralOrderDao">
+<insert id="addIntegralOrder" parameterType="com.lanxi.easyintegral.entity.IntegralOrder">
+insert into integral_order 
+(id,transition_sequence,sms_id,user_id,phone,gift_id,gift_count,total_price,total_value,work_time,status,res_code,res_msg,remark,beiy)
+values
+(#{id},#{transitionSequence},#{smsId},#{userId},#{phone},#{giftId},#{giftCount},#{totalPrice},#{totalValue},#{workTime},#{status},#{resCode},#{resMsg},#{remark},#{beiy})
+</insert>
+<insert id="addIntegralOrderDefault" parameterType="com.lanxi.easyintegral.entity.IntegralOrder">
+insert into integral_order 
+(id,transition_sequence,sms_id,user_id,phone,gift_id,gift_count,total_price,total_value,work_time,status,res_code,res_msg,remark,beiy)
+values
+(DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+</insert>
+<delete id="deleteIntegralOrder" parameterType="com.lanxi.easyintegral.entity.IntegralOrder">
+delete from integral_order
+<where>
+<if test="id != null and id!=''"> and id = #{id}  </if>
+<if test="transitionSequence != null and transitionSequence!=''"> and transition_sequence = #{transitionSequence}  </if>    
+<if test="smsId != null and smsId!=''"> and sms_id = #{smsId}  </if>  
+<if test="userId != null and userId!=''"> and user_id = #{userId}  </if>  
+<if test="phone != null and phone!=''"> and phone = #{phone}  </if>  
+<if test="giftId != null and giftId!=''"> and gift_id = #{giftId}  </if>  
+<if test="giftCount != null and giftCount!=''"> and gift_count = #{giftCount}  </if>  
+<if test="totalPrice != null and totalPrice!=''"> and total_price = #{totalPrice}  </if>  
+<if test="totalValue != null and totalValue!=''"> and total_value = #{totalValue}  </if>  
+<if test="workTime != null and workTime!=''"> and work_time = #{workTime}  </if>  
+<if test="status != null and status!=''"> and status = #{status}  </if>  
+<if test="resCode != null and resCode!=''"> and res_code = #{resCode}  </if>  
+<if test="resMsg != null and resMsg!=''"> and res_msg = #{resMsg}  </if>  
+<if test="remark != null and remark!=''"> and remark = #{remark}  </if>  
+<if test="beiy != null and beiy!=''"> and beiy = #{beiy}  </if>  
+</where>
+</delete>
+<delete id="deleteIntegralOrderById" parameterType="String">
+delete from integral_order
+<where>
+id = #{id}
+</where>
+</delete>
+<update id="updateIntegralOrder" parameterType="com.lanxi.easyintegral.entity.IntegralOrder">
+update integral_order
+<set> 
+<if test="id != null and id!=''">id = #{id},</if>  
+<if test="transitionSequence != null and transitionSequence!=''">transition_sequence = #{transitionSequence},</if> 
+<if test="smsId != null and smsId!=''">sms_id = #{smsId},</if>  
+<if test="userId != null and userId!=''">user_id = #{userId},</if>  
+<if test="phone != null and phone!=''">phone = #{phone},</if>  
+<if test="giftId != null and giftId!=''">gift_id = #{giftId},</if>  
+<if test="giftCount != null and giftCount!=''">gift_count = #{giftCount},</if>  
+<if test="totalPrice != null and totalPrice!=''">total_price = #{totalPrice},</if>  
+<if test="totalValue != null and totalValue!=''">total_value = #{totalValue},</if>  
+<if test="workTime != null and workTime!=''">work_time = #{workTime},</if>  
+<if test="status != null and status!=''">status = #{status},</if>  
+<if test="resCode != null and resCode!=''">res_code = #{resCode},</if>  
+<if test="resMsg != null and resMsg!=''">res_msg = #{resMsg},</if>  
+<if test="remark != null and remark!=''">remark = #{remark},</if>  
+<if test="beiy != null and beiy!=''">beiy = #{beiy},</if>  
+</set>
+<where>
+id = #{id} 
+</where>
+</update>
+<select id="selectIntegralOrder" resultMap="integralOrderMap" parameterType="com.lanxi.easyintegral.entity.IntegralOrder" resultType="com.lanxi.easyintegral.entity.IntegralOrder">
+select
+id,transition_sequence,sms_id,user_id,phone,gift_id,gift_count,total_price,total_value,work_time,status,res_code,res_msg,remark,beiy
+from integral_order
+<where> 
+<if test="id != null and id!=''"> and id = #{id}  </if>  
+<if test="transitionSequence != null and transitionSequence!=''"> and transition_sequence = #{transitionSequence}  </if>  
+<if test="smsId != null and smsId!=''"> and sms_id = #{smsId}  </if>  
+<if test="userId != null and userId!=''"> and user_id = #{userId}  </if>  
+<if test="phone != null and phone!=''"> and phone = #{phone}  </if>  
+<if test="giftId != null and giftId!=''"> and gift_id = #{giftId}  </if>  
+<if test="giftCount != null and giftCount!=''"> and gift_count = #{giftCount}  </if>  
+<if test="totalPrice != null and totalPrice!=''"> and total_price = #{totalPrice}  </if>  
+<if test="totalValue != null and totalValue!=''"> and total_value = #{totalValue}  </if>  
+<if test="workTime != null and workTime!=''"> and work_time = #{workTime}  </if>  
+<if test="status != null and status!=''"> and status = #{status}  </if>  
+<if test="resCode != null and resCode!=''"> and res_code = #{resCode}  </if>  
+<if test="resMsg != null and resMsg!=''"> and res_msg = #{resMsg}  </if>  
+<if test="remark != null and remark!=''"> and remark = #{remark}  </if>  
+<if test="beiy != null and beiy!=''"> and beiy = #{beiy}  </if>  
+</where>
+</select>
+<select id="selectIntegralOrderById" resultMap="integralOrderMap" parameterType="String" resultType="com.lanxi.easyintegral.entity.IntegralOrder">
+select
+id,transition_sequence,sms_id,user_id,phone,gift_id,gift_count,total_price,total_value,work_time,status,res_code,res_msg,remark,beiy
+from integral_order
+<where> 
+id = #{id} 
+</where>
+</select>
+<resultMap id="integralOrderMap" type="com.lanxi.easyintegral.entity.IntegralOrder">
+<result property="id" 			column="id"></result>
+<result property="smsId" 			column="sms_id"></result>
+<result property="userId" 			column="user_id"></result>
+<result property="phone" 			column="phone"></result>
+<result property="giftId" 			column="gift_id"></result>
+<result property="giftCount" 			column="gift_count"></result>
+<result property="totalPrice" 			column="total_price"></result>
+<result property="totalValue" 			column="total_value"></result>
+<result property="workTime" 			column="work_time"></result>
+<result property="status" 			column="status"></result>
+<result property="resCode" 			column="res_code"></result>
+<result property="resMsg" 			column="res_msg"></result>
+<result property="remark" 			column="remark"></result>
+<result property="beiy" 			column="beiy"></result>
+<result property="transitionSequence" 			column="transition_sequence"></result>
+</resultMap>
+</mapper>
