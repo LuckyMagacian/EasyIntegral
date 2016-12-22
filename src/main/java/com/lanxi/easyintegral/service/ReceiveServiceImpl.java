@@ -137,7 +137,7 @@ public class ReceiveServiceImpl implements ReceiveService {
 			logger.info("创建订单完成,order:"+order);
 			entityService.addOrder(order);
 			logger.info("保存订单完成!");
-			if(!bisService.subPoint(userId,gift.getValue())){
+			if(!bisService.subPoint(order)){
 				logger.info("用户积分扣除失败!下单失败!");
 				noticeSubpointExceptino(phone);
 				return ;

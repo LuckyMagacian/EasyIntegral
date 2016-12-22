@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lanxi.easyintegral.entity.IntegralGift;
 import com.lanxi.easyintegral.entity.IntegralLevel;
+import com.lanxi.easyintegral.entity.IntegralOrder;
 import com.lanxi.easyintegral.entity.IntegralSms;
 import com.lanxi.easyintegral.entity.IntegralSmsTemplate;
 import com.lanxi.easyintegral.entity.IntegralUser;
@@ -113,16 +114,10 @@ public interface BusinessService {
 	public IntegralSms makeSms(IntegralSmsTemplate template, List<IntegralGift> gifts, Integer point,String userId ,String phone);
 	/**
 	 * 扣除用户积分
-	 * @param user
-	 * @return
-	 */
-	public boolean subPoint(IntegralUser user,Integer point);
-	/**
-	 * 扣除用户积分
 	 * @param phone
 	 * @return
 	 */
-	public boolean subPoint(String userId,Integer point);
+	public boolean subPoint(IntegralOrder order);
 	/**
 	 * 根据手机号码获取用户id
 	 * @param phone

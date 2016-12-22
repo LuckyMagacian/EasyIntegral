@@ -6,17 +6,27 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import com.lanxi.easyintegral.JFreport.Body;
+import com.lanxi.easyintegral.JFreport.Head;
+import com.lanxi.easyintegral.JFreport.JFBaoWen;
+import com.lanxi.easyintegral.JFreport.JFPoints;
+import com.lanxi.easyintegral.JFreport.Original;
+import com.lanxi.easyintegral.JFreport.ResHead;
 import com.lanxi.easyintegral.entity.IntegralGift;
 import com.lanxi.easyintegral.entity.IntegralLevel;
+import com.lanxi.easyintegral.entity.IntegralOrder;
 import com.lanxi.easyintegral.entity.IntegralSms;
 import com.lanxi.easyintegral.entity.IntegralSmsTemplate;
 import com.lanxi.easyintegral.entity.IntegralUser;
+import com.lanxi.easyintegral.util.AppException;
 import com.lanxi.easyintegral.util.CheckReplaceUtil;
 import com.lanxi.easyintegral.util.ConfigUtil;
 import com.lanxi.easyintegral.util.RandomUtil;
 import com.lanxi.easyintegral.util.TimeUtil;
+import com.lanxi.httpsclient.core.HttpsClient;
 import com.sun.corba.se.spi.orbutil.fsm.State;
 
 import sun.net.www.content.image.gif;
@@ -105,16 +115,43 @@ public class BusinessServiceImpl implements BusinessService {
 		sms.setMaxReplyTimes(ConfigServiceImpl.getMaxReply());
 		return sms;
 	}
-
+	@SuppressWarnings("finally")
 	@Override
-	public boolean subPoint(IntegralUser user,Integer point) {
-		return subPoint(user.getId(),point);
-	}
-
-	@Override
-	public boolean subPoint(String userId,Integer point) {
-		// TODO 扣积分 未实现
-		return true;
+	public boolean subPoint(IntegralOrder order) {
+		boolean flag=false;
+		try {
+			Head head=new Head();
+			head.setBusinessId(order.getId());
+			//TODO 发起机构号需要在改
+			head.setOrgId(ConfigServiceImpl.get("orgId"));
+			head.setReqDate(TimeUtil.getDate());
+			head.setReserve("");
+			Body body=new Body();
+			body.setIdNo(TimeUtil.getDateTime());
+			body.setIdType(Body.CUST_ID_TYPE_ACCOUNT);
+			body.setReducePoints(order.getTotalValue()+"");
+			Original original=new Original();
+			original.setHead(head);
+			original.setBody(body);
+			JFPoints points=new JFPoints();
+			points.setOriginal(original);
+			points.sign();
+			JFBaoWen baoWen=new JFBaoWen();
+			baoWen.setPoints(points);
+			String rs=HttpsClient.sendData(baoWen.toDocument().asXML(), ConfigServiceImpl.get("pointUrl"), ConfigServiceImpl.getCharset(), 60000);
+			if(rs!=null){
+				JFBaoWen rsBaoWen=JFBaoWen.fromDocStr(rs);
+				if(rsBaoWen!=null){
+					ResHead resHead=(ResHead) rsBaoWen.getPoints().getOriginal().getHead();
+					if(resHead.getRetCode().equals(ResHead.RETCODE_SUCCESS))
+						flag=true;
+				}
+			}
+		} catch (Exception e) {
+			throw new AppException("积分扣除异常",e);
+		}finally {
+			return flag;
+		}
 	}
 
 	@Override

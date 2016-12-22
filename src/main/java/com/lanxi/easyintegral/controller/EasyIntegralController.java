@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lanxi.easyintegral.service.ReceiveService;
 import com.lanxi.easyintegral.service.TimingService;
@@ -17,23 +18,23 @@ public class EasyIntegralController {
 	ReceiveService receiveService;
 	@Resource
 	TimingService timingService;
-	@RequestMapping(value="/receiveSms")
+	@RequestMapping(value="/receiveSms",method=RequestMethod.POST)
 	public void receiveService(HttpServletRequest req,HttpServletResponse res){
 		receiveService.receive(req, res);
 	}
-	@RequestMapping(value="/noticeUser")
+//	@RequestMapping(value="/noticeUser")
 	public void noticeUser(HttpServletRequest req,HttpServletResponse res){
 		timingService.noticeUser();
 	}
-	@RequestMapping(value="/sendSms")
+//	@RequestMapping(value="/sendSms")
 	public void sendSms(HttpServletRequest req,HttpServletResponse res){
 		timingService.sendSmsList();
 	}
-	@RequestMapping(value="/outSms")
+//	@RequestMapping(value="/outSms")
 	public void outSms(HttpServletRequest req,HttpServletResponse res){
 		timingService.outSms();
 	}
-	@RequestMapping(value="/outGift")
+//	@RequestMapping(value="/outGift")
 	public void outGift(HttpServletRequest req,HttpServletResponse res){
 		timingService.outGift();
 	}
