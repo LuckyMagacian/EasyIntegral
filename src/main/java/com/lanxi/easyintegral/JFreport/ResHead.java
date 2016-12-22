@@ -5,7 +5,7 @@ import org.dom4j.dom.DOMElement;
 
 public class ResHead extends Head {
 	
-	public static String RETCODE_SUCCESS="";
+	public static String RETCODE_SUCCESS="0000";
 	private String retCode;		/**返回码*/
 	private String retMsg;		/**返回信息*/
 	public String getRetCode() {
